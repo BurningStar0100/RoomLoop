@@ -45,7 +45,7 @@ const server = http.createServer(app);
 //   ? [process.env.CLIENT_URL || 'https://room-loop-f1ey.vercel.app']
 //   : ['http://localhost:3000'];
 const allowedOrigins = [
-  'https://room-loop-frontend.vercel.app',      // your production frontend
+  'https://room-loop-test.vercel.app',      // your production frontend
   'https://room-loop-test-gr8q3jjiz-burningstar0100s-projects.vercel.app',  // vercel preview
   'http://localhost:3000'
 ];
