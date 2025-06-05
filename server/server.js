@@ -40,6 +40,11 @@ const server = http.createServer(app);
 //   }
 // });
 
+
+const allowedOrigins = process.env.NODE_ENV === 'production'
+  ? [process.env.CLIENT_URL || 'https://room-loop-f1ey.vercel.app']
+  : ['http://localhost:3000'];
+
 const io = socketio(server, {
   cors: {
     origin: allowedOrigins,
@@ -144,10 +149,6 @@ io.on('connection', socket => {
 // Middleware
 app.use(express.json());
 //app.use(cors());
-
-const allowedOrigins = process.env.NODE_ENV === 'production'
-  ? [process.env.CLIENT_URL || 'https://room-loop-f1ey.vercel.app']
-  : ['http://localhost:3000'];
 
 app.use(cors({
   origin: allowedOrigins,
