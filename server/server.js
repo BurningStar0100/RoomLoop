@@ -34,7 +34,7 @@ const getAllowedOrigins = () => {
     return [
       process.env.CLIENT_URL,
       // Add your Vercel deployment URL here
-      'https://your-app-name.vercel.app',
+      'https://room-loop-frontend.vercel.app',
       // Add any other production URLs
     ].filter(Boolean); // Remove any undefined values
   } else {
