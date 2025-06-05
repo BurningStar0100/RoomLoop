@@ -41,9 +41,29 @@ const server = http.createServer(app);
 // });
 
 
-const allowedOrigins = process.env.NODE_ENV === 'production'
-  ? [process.env.CLIENT_URL || 'https://room-loop-f1ey.vercel.app']
-  : ['http://localhost:3000'];
+// const allowedOrigins = process.env.NODE_ENV === 'production'
+//   ? [process.env.CLIENT_URL || 'https://room-loop-f1ey.vercel.app']
+//   : ['http://localhost:3000'];
+const allowedOrigins = [
+  'https://room-loop-frontend.vercel.app',      // your production frontend
+  'https://room-loop-test-gr8q3jjiz-burningstar0100s-projects.vercel.app',  // vercel preview
+  'http://localhost:3000'
+];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
+app.options('*', cors(corsOptions));
 
 const io = socketio(server, {
   cors: {
@@ -150,10 +170,10 @@ io.on('connection', socket => {
 app.use(express.json());
 //app.use(cors());
 
-app.use(cors({
-  origin: allowedOrigins,
-  credentials: true,
-}));
+// app.use(cors({
+//   origin: allowedOrigins,
+//   credentials: true,
+// }));
 
 
 // Dev logging middleware
